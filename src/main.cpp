@@ -22,7 +22,7 @@
 DoubleResetDetector drd(DRD_TIMEOUT, DRD_ADDRESS);
 WiFiManager wifiManager;
 WiFiClient espClient;
-WiFiManagerParameter *custom_arealist;
+std::unique_ptr<WiFiManagerParameter> custom_arealist;
 bool fsMounted = false;
 bool shouldSaveConfig = false;
 
@@ -208,7 +208,7 @@ void fs_init()
   {
     Serial.println("failed to mount FS");
   }
-  custom_arealist = new WiFiManagerParameter("area_list", "רשימת אזורים", arealist, 250);
+  custom_arealist.reset(new WiFiManagerParameter("area_list", "רשימת אזורים", arealist, 250));
 }
 
 // Callback indicating to save config
@@ -267,7 +267,7 @@ void wifi_begin()
   {
     Serial.println("double reset or no SSID");
     wifiManager.setSaveConfigCallback(saveConfigCallback);
-    wifiManager.addParameter(custom_arealist);
+    wifiManager.addParameter(custom_arealist.get());
     if (!wifiManager.startConfigPortal(char_array))
     {
       leds_wifiFailedToConnect();
