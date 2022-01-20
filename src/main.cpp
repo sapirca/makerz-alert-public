@@ -167,7 +167,7 @@ String mqtt_generateClientId()
   s.replace("-", "");
   s.replace(":", "");
   s.replace(" ", "");
-  s = s.substring(0, 6);
+  s = s.substring(6);
   utils_inPlaceReverse(s);
   return s;
 }
