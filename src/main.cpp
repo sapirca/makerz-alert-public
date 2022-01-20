@@ -42,8 +42,8 @@ char arealist[2000] = "";
 #define MIN_TIME_BETWEEN_ALERTS_MILLIS 8000
 
 // Heartbeat print
-#define HEARTBEAT_MILLIS 1000 * 60 * 5 //five minutes
-#define HEARTBEAT_MSG_BUFFER_SIZE (50)
+#define HEARTBEAT_MILLIS (1000 * 60 * 5) //five minutes
+#define HEARTBEAT_MSG_BUFFER_SIZE 50
 char msg[HEARTBEAT_MSG_BUFFER_SIZE];
 unsigned long lastMsg = 0;
 long int heartbeatValue = 0;
